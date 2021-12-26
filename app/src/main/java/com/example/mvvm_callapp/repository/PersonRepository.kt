@@ -12,5 +12,4 @@ class PersonRepository(private val personDao: PersonDao) {
 
     suspend fun deletePerson(person: Person) = personDao.delete(person)
 
-    suspend fun findByName(first: String, last: String) = personDao.findByName(first, last)
 }

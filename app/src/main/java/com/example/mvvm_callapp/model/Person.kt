@@ -11,6 +11,13 @@ data class Person(
     @PrimaryKey(autoGenerate = true)
     val personId: Int? = null
 ){
+    fun infoString(): String{
+        return firstName+lastName+phoneNumber
+    }
+
+    override fun toString(): String {
+        return "[${personId}]  $firstName  $lastName -> $phoneNumber"
+    }
 
 
 }

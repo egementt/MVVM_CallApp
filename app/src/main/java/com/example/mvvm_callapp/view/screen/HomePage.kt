@@ -1,12 +1,12 @@
 package com.example.mvvm_callapp.view.screen
 
 import android.app.Application
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
@@ -22,21 +22,25 @@ import com.example.mvvm_callapp.viewmodel.PersonViewModel
 
 @Composable
 fun HomePage(navController: NavController, application: Application) {
-    val personViewModel: PersonViewModel = PersonViewModel(application)
+    val personViewModel = PersonViewModel(application)
     val list = personViewModel.personList.observeAsState(initial = emptyList())
+
     Scaffold(
         Modifier.fillMaxSize(),
         floatingActionButton = { Fab(navController = navController) }) {
-        Column(
-            Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            if (list.value.isEmpty()) EmptyListView() else ListView(list = list.value, personViewModel)
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if (list.value.isEmpty()) EmptyListView() else ListView(list = list.value, personViewModel)
+            }
+
         }
     }
-}
+
 
 @Composable
 fun EmptyListView() {
